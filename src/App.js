@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import CameraScreen from "./components/CameraScreen";
+import Recommendation from "./components/Recommendation";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="h-screen bg-gray-50">
+        {/* Puedes agregar aquí una barra de navegación o un layout común */}
+        <Routes>
+          {/* Ruta para la pantalla inicial donde se captura la foto */}
+          <Route path="/" element={<CameraScreen/>} />
+          {/* Ruta para la pantalla de resultados */}
+          <Route path="/recommendation" element={<Recommendation/>} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
