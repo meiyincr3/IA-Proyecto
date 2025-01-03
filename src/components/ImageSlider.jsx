@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 const ImageSlider = () => {
   // Dinámicamente importar todas las imágenes desde la carpeta 'src/images'
   const importAll = (r) => r.keys().map(r);
-  const images = importAll(require.context("./images", false, /\.(png|jpe?g|webp)$/));
+  const images = importAll(require.context("../images", false, /\.(png|jpe?g|webp)$/));
 
   const settings = {
     dots: true,
