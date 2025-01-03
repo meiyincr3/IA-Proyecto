@@ -18,13 +18,12 @@ function AdmiView() {
       {/* Encabezado */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-blue-600">Gestión de Recomendaciones</h1>
-        <a
-          href="#"
-          onClick={() => navigate("/")}
-          className="text-lg text-blue-500 underline hover:text-blue-700 transition"
-        >
-          Cambiar tipo de usuario
-        </a>
+        <button
+  onClick={() => navigate("/")}
+  className="text-lg text-blue-500 underline hover:text-blue-700 transition bg-transparent border-none cursor-pointer"
+>
+  Cambiar tipo de usuario
+</button>
       </div>
 
       <div className="flex flex-1 gap-6">
