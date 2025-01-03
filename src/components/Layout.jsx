@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ImageSlider from './ImageSlider';
-import CameraScreen from './CameraScreen';
 import { useNavigate } from "react-router-dom";
 import { Camera } from "lucide-react";
 
