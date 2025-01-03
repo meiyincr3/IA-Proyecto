@@ -1,0 +1,14 @@
+# Ignorar node_modules
+node_modules/
+
+# Ignorar caché
+.cache/
+*.pack
+
+# Ignorar archivos de construcción
+build/
+dist/
+
+# Ignorar archivos de configuración del editor
+.vscode/
+.idea/
