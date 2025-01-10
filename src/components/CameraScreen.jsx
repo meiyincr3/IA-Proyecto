@@ -9,6 +9,10 @@ function CameraScreen({ fullScreen = false, autoStart = false }) {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  const [originalImageUrl, setOriginalImageUrl] = useState(null);
+  const [processedImageUrl, setProcessedImageUrl] = useState(null);
+
+  // Inicia la cámara
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -17,16 +21,18 @@ function CameraScreen({ fullScreen = false, autoStart = false }) {
       videoRef.current.srcObject = stream;
       setCameraStarted(true);
     } catch (error) {
-      console.error("Error accessing the camera:", error);
+      console.error("Error accediendo a la cámara:", error);
     }
   };
 
+  // Auto inicia la cámara si autoStart es true
   useEffect(() => {
     if (autoStart) {
       startCamera();
     }
   }, [autoStart]);
 
+  // Captura la foto desde la cámara
   const capturePhoto = () => {
     if (!cameraStarted || !videoRef.current) return;
 
@@ -43,16 +49,60 @@ function CameraScreen({ fullScreen = false, autoStart = false }) {
     setCameraStarted(false);
   };
 
+  // Reinicia la cámara
   const handleRetake = () => {
     setPhoto(null);
     startCamera();
   };
 
-  const handleContinue = () => {
+  // Maneja el envío de la imagen al backend
+  const handleContinue = async () => {
+    if (!photo) {
+      alert("No hay foto para continuar.");
+      return;
+    }
+
     setIsLoading(true);
-    setTimeout(() => {
-      navigate("/recommendation", { state: { photo } });
-    }, 1500);
+    
+    console.log("Datos de la imagen antes de enviar:", photo);
+
+    try {
+      //TODO: cambiar a local o prouduccion segun corresponda
+      //se puede intentar hacer un env para facilidad de uso
+      //const response = await fetch("http://127.0.0.1:8000/recommendations/upload-image/", {
+      const response = await fetch("https://touristapp.pythonanywhere.com/recommendations/upload-image/", {
+
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ image: photo }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Guarda las URLs de las imágenes devueltas
+        setOriginalImageUrl(data.original_image_url);
+        setProcessedImageUrl(data.processed_image_url);
+
+        // Navega a la siguiente página con las URLs en el estado
+        navigate("/recommendation", {
+          state: {
+            originalImageUrl: data.original_image_url,
+            processedImageUrl: data.processed_image_url,
+          },
+        });
+      } else {
+        console.error("Error al procesar la imagen:", data);
+        alert(data.error || "Error al procesar la imagen.");
+      }
+    } catch (error) {
+      console.error("Error al enviar la imagen:", error);
+      alert("Ocurrió un error al enviar la imagen.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
