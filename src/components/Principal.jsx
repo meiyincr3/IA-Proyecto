@@ -17,7 +17,10 @@ function Principal() {
           <div className="space-y-8">
             {/* Opción Administrador */}
             <button
-              onClick={() => navigate("/admin-view")}
+              onClick={() => {
+                // Redirige directamente al enlace externo
+                window.location.href = "https://touristapp.pythonanywhere.com/login/";
+              }}
               className="w-80 p-6 border rounded-lg flex items-center gap-4 hover:shadow-lg transition transform hover:scale-105 mx-auto"
               style={{ backgroundColor: "#f9f9f9" }}
             >
