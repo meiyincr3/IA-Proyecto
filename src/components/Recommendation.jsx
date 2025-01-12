@@ -1,7 +1,14 @@
 import React from 'react';
 import {Users, MapPin, Calendar, Star, Navigation } from 'lucide-react';
+import { useLocation } from "react-router-dom";
+
+
 
 function TourismDashboard() {
+  const location = useLocation();
+  const { originalImageUrl, processedImageUrl, processedImageBase64, dataPeople } = location.state || {};
+  console.log("Contenido de dataPeople:", dataPeople);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-900 via-gray-900 to-black text-white p-6">
       <div className="max-w-6xl mx-auto">
@@ -11,7 +18,7 @@ function TourismDashboard() {
           <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 shadow-xl">
             <div className="aspect-video relative overflow-hidden rounded-lg mb-4">
               <img 
-                src="/api/placeholder/600/400" 
+                src={processedImageBase64} 
                 alt="Group analyzed"
                 className="w-full h-full object-cover"
               />
@@ -19,7 +26,7 @@ function TourismDashboard() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent">
                 <div className="absolute bottom-4 left-4 flex items-center gap-2">
                   <Users className="w-5 h-5 text-blue-400" />
-                  <span className="text-white font-medium">3 People Detected</span>
+                  <span className="text-white font-medium">{dataPeople ? `${dataPeople.length} Personas detectadas` : "No se detectaron personas"}</span>
                 </div>
               </div>
             </div>
@@ -27,7 +34,7 @@ function TourismDashboard() {
             <div className="flex justify-between items-center p-2">
               <div className="flex items-center gap-2">
                 <div className="h-2 w-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-green-500">Analysis Complete</span>
+                <span className="text-green-500">Análisis completo</span>
               </div>
               <span className="text-gray-400">Group Type: Friends</span>
             </div>
@@ -36,20 +43,20 @@ function TourismDashboard() {
           {/* Right - Group Analysis */}
           <div className="space-y-4">
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 shadow-xl">
-              <h2 className="text-2xl font-bold mb-4">Group Analysis Results</h2>
+              <h2 className="text-2xl font-bold mb-4">Resultados del Análisis</h2>
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-3 bg-gray-700/50 rounded-lg">
                   <div className="flex items-center gap-3">
                     <Users className="w-6 h-6 text-blue-400" />
-                    <span>Group Size</span>
+                    <span>Tamaño del grupo</span>
                   </div>
-                  <span className="text-2xl font-bold">3</span>
+                  <span className="text-2xl font-bold">{dataPeople ? dataPeople.length : 0}</span>
                 </div>
                 
                 <div className="flex items-center justify-between p-3 bg-gray-700/50 rounded-lg">
                   <div className="flex items-center gap-3">
                     <Star className="w-6 h-6 text-yellow-400" />
-                    <span>Recommended Activities</span>
+                    <span>Actividades recomendadas</span>
                   </div>
                   <span className="text-blue-400">View All</span>
                 </div>

@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { Camera, RefreshCw, Check, Loader } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+
 function CameraScreen({ fullScreen = false, autoStart = false }) {
   const videoRef = useRef(null);
   const [photo, setPhoto] = useState(null);
@@ -69,8 +70,9 @@ function CameraScreen({ fullScreen = false, autoStart = false }) {
     try {
       //TODO: cambiar a local o prouduccion segun corresponda
       //se puede intentar hacer un env para facilidad de uso
-      //const response = await fetch("http://127.0.0.1:8000/recommendations/upload-image/", {
-      const response = await fetch("https://touristapp.pythonanywhere.com/recommendations/upload-image/", {
+      
+      const response = await fetch("http://127.0.0.1:8000/recommendations/upload-image/", {
+      // const response = await fetch("https://touristapp.pythonanywhere.com/recommendations/upload-image/", {
 
         method: "POST",
         headers: {
@@ -82,6 +84,7 @@ function CameraScreen({ fullScreen = false, autoStart = false }) {
       const data = await response.json();
 
       if (response.ok) {
+        console.log("datos de la imagen procesada:", data);
         // Guarda las URLs de las imágenes devueltas
         setOriginalImageUrl(data.original_image_url);
         setProcessedImageUrl(data.processed_image_url);
@@ -91,6 +94,8 @@ function CameraScreen({ fullScreen = false, autoStart = false }) {
           state: {
             originalImageUrl: data.original_image_url,
             processedImageUrl: data.processed_image_url,
+            processedImageBase64: data.processed_image_base64, // Agregamos el Base64 aquí
+            dataPeople: data.dataPeople
           },
         });
       } else {
