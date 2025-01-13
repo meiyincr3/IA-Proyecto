@@ -15,7 +15,7 @@ function TourismDashboard() {
         {/* Header with Photo Analysis */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Left - Photo Display */}
-          <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 shadow-xl">
+          <div className="bg-orange-100/50 backdrop-blur-sm rounded-xl p-4 shadow-xl">
             <div className="aspect-video relative overflow-hidden rounded-lg mb-4">
               <img 
                 src={processedImageBase64} 
@@ -36,16 +36,15 @@ function TourismDashboard() {
                 <div className="h-2 w-2 bg-green-500 rounded-full animate-pulse" />
                 <span className="text-green-500">Análisis completo</span>
               </div>
-              <span className="text-gray-400">Group Type: Friends</span>
             </div>
           </div>
 
           {/* Right - Group Analysis */}
           <div className="space-y-4">
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 shadow-xl">
+            <div className="bg-orange-100/50 backdrop-blur-sm rounded-xl p-6 shadow-xl">
               <h2 className="text-2xl font-bold mb-4">Resultados del Análisis</h2>
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-3 bg-gray-700/50 rounded-lg">
+                <div className="flex items-center justify-between p-3 bg-stone-100/50 border-2  rounded-lg">
                   <div className="flex items-center gap-3">
                     <Users className="w-6 h-6 text-blue-400" />
                     <span>Tamaño del grupo</span>
@@ -62,11 +61,10 @@ function TourismDashboard() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
           {/* Activity Cards */}
-          aqui recomendaciones
           {['Adventure Park', 'Local Food Tour', 'Beach Activities'].map((activity, index) => (
-            <div key={index} className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 shadow-xl hover:bg-gray-700/50 transition-all cursor-pointer group">
+            <div key={index} className="bg-orange-100/50 backdrop-blur-sm rounded-xl p-4 shadow-xl hover:bg-orange-400/50 transition-all cursor-pointer group">
               <div className="flex items-center gap-3 mb-4">
-                <div className="bg-blue-600/50 p-2 rounded-lg group-hover:bg-blue-600 transition-colors">
+                <div className="bg-blue-100/50 p-2 rounded-lg group-hover:bg-blue-600 transition-colors">
                   <Navigation className="w-6 h-6" />
                 </div>
                 <span className="text-lg font-medium">{activity}</span>
@@ -77,10 +75,6 @@ function TourismDashboard() {
                   <div className="flex items-center gap-2">
                     <MapPin className="w-4 h-4" />
                     <span>2.5 km away</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    <span>4.8</span>
                   </div>
                 </div>
                 
