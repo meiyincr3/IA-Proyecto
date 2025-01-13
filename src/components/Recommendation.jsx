@@ -74,12 +74,12 @@ function TourismDashboard() {
                 <div className="flex items-center justify-between text-gray-400">
                   <div className="flex items-center gap-2">
                     <MapPin className="w-4 h-4" />
-                    <span>2.5 km away</span>
+                    <span>poner ciudad</span>
                   </div>
                 </div>
                 
                 <div className="text-sm text-gray-400">
-                  Perfect for groups of 3-5 people
+                  Perfect for groups of poner rango desde hasta people
                 </div>
               </div>
             </div>
