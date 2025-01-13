@@ -93,7 +93,7 @@ function TourismDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
           {/* Activity Cards */}
           {recommendations.map((activity, index) => (
-            <div key={index} className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 shadow-xl hover:bg-gray-700/50 transition-all cursor-pointer group">
+            <div key={index} className="bg-orange-100/50 backdrop-blur-sm rounded-xl p-4 shadow-xl hover:bg-orange-400/50 transition-all cursor-pointer group">
               <div className="flex items-center gap-3 mb-4">
                 <div className="bg-blue-100/50 p-2 rounded-lg group-hover:bg-blue-600 transition-colors">
                   <Navigation className="w-6 h-6" />
@@ -106,10 +106,6 @@ function TourismDashboard() {
                   <div className="flex items-center gap-2">
                     <MapPin className="w-4 h-4" />
                     <span>{activity.ciudad || "Ubicación desconocida"}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    <span>4.8</span>
                   </div>
                 </div>
                 
