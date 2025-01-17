@@ -4,43 +4,9 @@ import { useLocation } from "react-router-dom";
 
 function TourismDashboard() {
   const location = useLocation();
-  const { originalImageUrl, processedImageBase64, dataPeople } = location.state || {};
-  const [recommendations, setRecommendations] = useState([]);
-
-  useEffect(() => {
-    // Realiza el fetch al endpoint del backend
-    const fetchRecommendations = async () => {
-      try {
-        const response = await fetch("http://127.0.0.1:8000/recommendations/upload-image/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            image: processedImageBase64, // Envía la imagen procesada al backend
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error("Error al obtener las recomendaciones");
-        }
-
-        const data = await response.json();
-        setRecommendations(data.recomendaciones || []);
-
-
-        console.log("Recomendaciones de la data:", data);
-
-
-      } catch (error) {
-        console.error("Error al cargar las recomendaciones:", error);
-      }
-    };
-
-    if (processedImageBase64) {
-      fetchRecommendations(); // Llama a la función fetch si hay una imagen procesada
-    }
-  }, [processedImageBase64]);
+  const { originalImageUrl, processedImageBase64, dataPeople, recommendations } = location.state || {};
+  
+  
 
   return (
     <div className="min-h-screen bg-white text-orange-400 p-6">

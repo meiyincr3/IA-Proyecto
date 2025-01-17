@@ -44,6 +44,7 @@ function CameraScreen({ fullScreen = false, autoStart = false }) {
     const ctx = canvas.getContext("2d");
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     const dataUrl = canvas.toDataURL("image/png");
+    console.log("dataUrl:", dataUrl);
     setPhoto(dataUrl);
 
     video.srcObject.getTracks().forEach((track) => track.stop());
@@ -64,15 +65,15 @@ function CameraScreen({ fullScreen = false, autoStart = false }) {
     }
 
     setIsLoading(true);
-    
+
     console.log("Datos de la imagen antes de enviar:", photo);
 
     try {
       //TODO: cambiar a local o prouduccion segun corresponda
       //se puede intentar hacer un env para facilidad de uso
-      
+
       const response = await fetch("http://127.0.0.1:8000/recommendations/upload-image/", {
-      // const response = await fetch("https://touristapp.pythonanywhere.com/recommendations/upload-image/", {
+        // const response = await fetch("https://touristapp.pythonanywhere.com/recommendations/upload-image/", {
 
         method: "POST",
         headers: {
@@ -85,6 +86,7 @@ function CameraScreen({ fullScreen = false, autoStart = false }) {
 
       if (response.ok) {
         console.log("datos de la imagen procesada:", data);
+        console.log("Recomendaciones de las personas:", data.recomendaciones);
         // Guarda las URLs de las imágenes devueltas
         setOriginalImageUrl(data.original_image_url);
         setProcessedImageUrl(data.processed_image_url);
@@ -95,7 +97,8 @@ function CameraScreen({ fullScreen = false, autoStart = false }) {
             originalImageUrl: data.original_image_url,
             processedImageUrl: data.processed_image_url,
             processedImageBase64: data.processed_image_base64, // Agregamos el Base64 aquí
-            dataPeople: data.dataPeople
+            dataPeople: data.dataPeople,
+            recommendations: data.recomendaciones
           },
         });
       } else {
